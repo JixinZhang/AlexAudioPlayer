@@ -87,6 +87,9 @@
 		787EDC0E1E88E2A30061CB6E /* ZAAudioRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 787EDC0D1E88E2A30061CB6E /* ZAAudioRequestTask.m */; };
 		787EDC111E8902AD0061CB6E /* ZAAudioLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 787EDC101E8902AD0061CB6E /* ZAAudioLoader.m */; };
 		787EDC131E890CAC0061CB6E /* songsOnline.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787EDC121E890CAC0061CB6E /* songsOnline.plist */; };
+		78F7666F1E8A09A100EBFA39 /* wanfeng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78F7666E1E8A09A100EBFA39 /* wanfeng.jpg */; };
+		78F766711E8A0A4B00EBFA39 /* DreamItPossible.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78F766701E8A0A4B00EBFA39 /* DreamItPossible.jpg */; };
+		78F766731E8A0AB800EBFA39 /* qinghuaci.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78F766721E8A0AB800EBFA39 /* qinghuaci.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -221,6 +224,9 @@
 		787EDC0F1E8902AD0061CB6E /* ZAAudioLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAAudioLoader.h; sourceTree = "<group>"; };
 		787EDC101E8902AD0061CB6E /* ZAAudioLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAAudioLoader.m; sourceTree = "<group>"; };
 		787EDC121E890CAC0061CB6E /* songsOnline.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = songsOnline.plist; sourceTree = "<group>"; };
+		78F7666E1E8A09A100EBFA39 /* wanfeng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wanfeng.jpg; sourceTree = "<group>"; };
+		78F766701E8A0A4B00EBFA39 /* DreamItPossible.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DreamItPossible.jpg; sourceTree = "<group>"; };
+		78F766721E8A0AB800EBFA39 /* qinghuaci.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = qinghuaci.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -608,6 +614,9 @@
 				787172E11E8507A7002C88F8 /* viva_400.png */,
 				787172E21E8507A7002C88F8 /* voice_400.png */,
 				787172E31E8507A7002C88F8 /* zxy_400.png */,
+				78F7666E1E8A09A100EBFA39 /* wanfeng.jpg */,
+				78F766701E8A0A4B00EBFA39 /* DreamItPossible.jpg */,
+				78F766721E8A0AB800EBFA39 /* qinghuaci.jpg */,
 			);
 			path = SingerImages;
 			sourceTree = "<group>";
@@ -679,7 +688,9 @@
 				7871732C1E8507A7002C88F8 /* zxy_400.png in Resources */,
 				782CCF441E839E72005682BC /* LaunchScreen.storyboard in Resources */,
 				787173251E8507A7002C88F8 /* rb_400.png in Resources */,
+				78F766711E8A0A4B00EBFA39 /* DreamItPossible.jpg in Resources */,
 				787173171E8507A7002C88F8 /* Somebody That I Used To Know.mp3 in Resources */,
+				78F766731E8A0AB800EBFA39 /* qinghuaci.jpg in Resources */,
 				787173221E8507A7002C88F8 /* gem_400.png in Resources */,
 				787173161E8507A7002C88F8 /* See You Again.mp3 in Resources */,
 				787173151E8507A7002C88F8 /* Rather Be.mp3 in Resources */,
@@ -700,6 +711,7 @@
 				7871731E1E8507A7002C88F8 /* 爸爸去哪儿.mp3 in Resources */,
 				7871731A1E8507A7002C88F8 /* 小苹果.mp3 in Resources */,
 				787173181E8507A7002C88F8 /* unravel.mp3 in Resources */,
+				78F7666F1E8A09A100EBFA39 /* wanfeng.jpg in Resources */,
 				7871732B1E8507A7002C88F8 /* voice_400.png in Resources */,
 				787173261E8507A7002C88F8 /* see u again.png in Resources */,
 				787EDC131E890CAC0061CB6E /* songsOnline.plist in Resources */,

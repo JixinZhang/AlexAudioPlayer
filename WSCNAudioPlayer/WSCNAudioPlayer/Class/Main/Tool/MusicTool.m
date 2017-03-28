@@ -24,7 +24,8 @@ singleton_implementation(MusicTool)
 
 
 -(void)prepareToPlayWithMusic:(MusicModel *)music {
-    
+    [self.avPlayer pause];
+    [self.player pause];
     if ([music.fileName hasPrefix:@"http"]) {
         NSURL *musicUrl = [NSURL URLWithString:music.fileName];
         
@@ -35,35 +36,31 @@ singleton_implementation(MusicTool)
 
         BOOL isCacheFileExist = [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath];
         if (isCacheFileExist) {
-            
-            self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:cacheFilePath] error:nil];
-            self.player.delegate = self;
-            
             //准备播放音乐
-//            [self.player prepareToPlay];
-//            self.audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:cacheFilePath] options:nil];
-//            self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioAsset];
-//            if (!self.avPlayer) {
-//                self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
-//            } else {
-//                [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
-//            }
+            self.audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"file:/\/\/%@",cacheFilePath]] options:nil];
+            self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioAsset];
+            if (!self.avPlayer) {
+                self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
+            } else {
+                [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
+            }
             return;
         }
         self.audioLoader = [[ZAAudioLoader alloc] initWithCacheFilePath:cacheFilePath];
         NSURL *playUrl = [self.audioLoader getSchemeAudioURL:musicUrl];
         self.audioURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
-        [self.audioURLAsset.resourceLoader setDelegate:self.audioLoader queue:dispatch_get_main_queue()];
+        [self.audioURLAsset.resourceLoader setDelegate:self.audioLoader queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioURLAsset];
         if (!self.avPlayer) {
             self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
         } else {
             [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
         }
+        self.avPlayer.volume = 0.5;
         [self.avplayerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
-        [self.avplayerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+//        [self.avplayerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
 
     } else {
         NSURL *musicUrl = [[NSBundle mainBundle] URLForResource:music.fileName withExtension:nil];
@@ -150,14 +147,12 @@ singleton_implementation(MusicTool)
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         // 如果此时用户已经暂停了，则不再需要开启播放了
-
-        
         [self.player play];
         // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
-        isBuffering = NO;
-        if (!self.avplayerItem.isPlaybackLikelyToKeepUp) {
-            [self bufferingSomeSecond];
-        }
+//        isBuffering = NO;
+//        if (!self.avplayerItem.isPlaybackLikelyToKeepUp) {
+//            [self bufferingSomeSecond];
+//        }
     });
 }
 
@@ -172,6 +167,16 @@ singleton_implementation(MusicTool)
     CGFloat totalDuration = CMTimeGetSeconds(duration);
     self.loadedProgress = timeInterval / totalDuration;
     NSLog(@"loadProgress = %.3f",self.loadedProgress);
+}
+
+- (void)setLoadedProgress:(CGFloat)loadedProgress
+{
+    if (_loadedProgress == loadedProgress) {
+        return;
+    }
+    
+    _loadedProgress = loadedProgress;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TBPlayerLoadProgressChangedNotification" object:nil];
 }
 
 @end

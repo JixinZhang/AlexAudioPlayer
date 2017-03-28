@@ -98,7 +98,7 @@
     }
     
     self.audioLength = audioLength;
-//    self.mimeType = 
+    self.mimeType = @"audio/mp3";
     if ([self.delegate respondsToSelector:@selector(didReceiveAudioLength:mimeType:withTask:)]) {
         [self.delegate didReceiveAudioLength:self.audioLength mimeType:self.mimeType withTask:self];
     }
