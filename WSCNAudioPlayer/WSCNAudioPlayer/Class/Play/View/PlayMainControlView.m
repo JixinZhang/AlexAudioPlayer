@@ -266,11 +266,11 @@
     if (self.isPlaying && self.isDragging == NO)
     {
         // 获取当前时间
-        double currentTime = [MusicTool sharedMusicTool].player.currentTime;
-        self.slider.value = currentTime;
-        self.slider.dotView.x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
-        //更新时间
-        self.currentTime.text = [NSString getMinuteSecondFrom:currentTime];
+//        double currentTime = [MusicTool sharedMusicTool].player.currentTime;
+//        self.slider.value = currentTime;
+//        self.slider.dotView.x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
+//        //更新时间
+//        self.currentTime.text = [NSString getMinuteSecondFrom:currentTime];
     }
 }
 

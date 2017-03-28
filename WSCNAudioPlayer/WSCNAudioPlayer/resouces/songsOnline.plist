@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>songName</key>
+		<string>华尔街见闻音频</string>
+		<key>fileName</key>
+		<string>http://ok0lm7lph.bkt.clouddn.com/3%E6%9C%8811%E6%97%A5%E4%BB%98%E9%B9%8F%E8%AF%B4%EF%BC%9A%E4%BB%8E%E5%BE%B7%E6%8B%89%E5%90%89%E8%AE%B2%E8%AF%9D%E8%81%8A%E8%81%8A%E6%B1%87%E7%8E%87%E7%9A%84%E7%9B%B8%E5%AF%B9%E9%97%AE%E9%A2%98.MP3</string>
+		<key>singer</key>
+		<string>华尔街见闻</string>
+		<key>albumImage</key>
+		<string>song_400.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>晚风</string>
+		<key>fileName</key>
+		<string>http://music.163.com/m/song?id=156551</string>
+		<key>singer</key>
+		<string>五百</string>
+		<key>albumImage</key>
+		<string>kzxd_400.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>Dream It Possible</string>
+		<key>fileName</key>
+		<string>http://music.163.com/m/song?id=37095955</string>
+		<key>singer</key>
+		<string>张靓颖</string>
+		<key>albumImage</key>
+		<string>song_400.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>Somebody That I Used To Know</string>
+		<key>fileName</key>
+		<string>Somebody That I Used To Know.mp3</string>
+		<key>singer</key>
+		<string>Christina Grimmie</string>
+		<key>albumImage</key>
+		<string>voice_400.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>See You Again</string>
+		<key>fileName</key>
+		<string>See You Again.mp3</string>
+		<key>singer</key>
+		<string>Wiz Khalifa,Charlie Puth</string>
+		<key>albumImage</key>
+		<string>see u again.png</string>
+	</dict>
+</array>
+</plist>
