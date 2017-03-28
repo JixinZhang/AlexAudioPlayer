@@ -7,6 +7,8 @@
 //
 
 #import "ZAAudioRequestTask.h"
+#import "ZAAudioDataLoader.h"
+#import "MusicTool.h"
 
 @interface ZAAudioRequestTask()<NSURLSessionDataDelegate, AVAssetResourceLoaderDelegate>
 
@@ -133,16 +135,21 @@
     } else {
         if (self.taskArr.count < 2) {
             _isFinishLoad = YES;
+            NSURLComponents *actualUrlComponents = [[NSURLComponents alloc] initWithURL:_url
+                                                                resolvingAgainstBaseURL:NO];
+            actualUrlComponents.scheme = @"http";
             
-//            NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-//            NSString *movePath = [document stringByAppendingString:_tempPath];
-//            BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:self.tempPath toPath:movePath error:nil];
-//            if (isSuccess) {
-//                NSLog(@"rename success");
-//            } else {
-//                NSLog(@"rename fail");
-//            }
-//            NSLog(@"move path = %@",movePath);
+            NSString *movePath = [[MusicTool sharedMusicTool] getAudioCachePathWithURLString:[[actualUrlComponents URL] absoluteString]];
+            BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:self.tempPath toPath:movePath error:nil];
+            if (isSuccess) {
+                NSLog(@"rename success");
+                if ([[NSFileManager defaultManager] fileExistsAtPath:self.tempPath]) {
+                    [[NSFileManager defaultManager] removeItemAtPath:self.tempPath error:nil];
+                }
+            } else {
+                NSLog(@"rename fail");
+            }
+            NSLog(@"move path = %@",movePath);
         }
         if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
             [self.delegate didFinishLoadingWithTask:self];

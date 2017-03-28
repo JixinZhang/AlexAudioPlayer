@@ -1,12 +1,12 @@
 //
-//  ZAAudioLoader.m
+//  ZAAudioDataLoader.m
 //  WSCNAudioPlayer
 //
 //  Created by ZhangBob on 27/03/2017.
 //  Copyright © 2017 wallstreetcn.com. All rights reserved.
 //
 
-#import "ZAAudioLoader.h"
+#import "ZAAudioDataLoader.h"
 #import "ZAAudioRequestTask.h"
 #import "CommonCrypto/CommonDigest.h"
 #import <MobileCoreServices/MobileCoreServices.h>

@@ -1,5 +1,5 @@
 //
-//  ZAAudioLoader.h
+//  ZAAudioDataLoader.h
 //  WSCNAudioPlayer
 //
 //  Created by ZhangBob on 27/03/2017.

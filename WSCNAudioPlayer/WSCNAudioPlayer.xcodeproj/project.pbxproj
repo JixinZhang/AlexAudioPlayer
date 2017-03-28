@@ -85,7 +85,7 @@
 		7871732C1E8507A7002C88F8 /* zxy_400.png in Resources */ = {isa = PBXBuildFile; fileRef = 787172E31E8507A7002C88F8 /* zxy_400.png */; };
 		7871732D1E8507A7002C88F8 /* songs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787172E41E8507A7002C88F8 /* songs.plist */; };
 		787EDC0E1E88E2A30061CB6E /* ZAAudioRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 787EDC0D1E88E2A30061CB6E /* ZAAudioRequestTask.m */; };
-		787EDC111E8902AD0061CB6E /* ZAAudioLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 787EDC101E8902AD0061CB6E /* ZAAudioLoader.m */; };
+		787EDC111E8902AD0061CB6E /* ZAAudioDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 787EDC101E8902AD0061CB6E /* ZAAudioDataLoader.m */; };
 		787EDC131E890CAC0061CB6E /* songsOnline.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787EDC121E890CAC0061CB6E /* songsOnline.plist */; };
 		78F7666F1E8A09A100EBFA39 /* wanfeng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78F7666E1E8A09A100EBFA39 /* wanfeng.jpg */; };
 		78F766711E8A0A4B00EBFA39 /* DreamItPossible.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78F766701E8A0A4B00EBFA39 /* DreamItPossible.jpg */; };
@@ -221,8 +221,8 @@
 		7871732E1E8507E9002C88F8 /* CloudMusic.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudMusic.pch; sourceTree = "<group>"; };
 		787EDC0C1E88E2A30061CB6E /* ZAAudioRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAAudioRequestTask.h; sourceTree = "<group>"; };
 		787EDC0D1E88E2A30061CB6E /* ZAAudioRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAAudioRequestTask.m; sourceTree = "<group>"; };
-		787EDC0F1E8902AD0061CB6E /* ZAAudioLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAAudioLoader.h; sourceTree = "<group>"; };
-		787EDC101E8902AD0061CB6E /* ZAAudioLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAAudioLoader.m; sourceTree = "<group>"; };
+		787EDC0F1E8902AD0061CB6E /* ZAAudioDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAAudioDataLoader.h; sourceTree = "<group>"; };
+		787EDC101E8902AD0061CB6E /* ZAAudioDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAAudioDataLoader.m; sourceTree = "<group>"; };
 		787EDC121E890CAC0061CB6E /* songsOnline.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = songsOnline.plist; sourceTree = "<group>"; };
 		78F7666E1E8A09A100EBFA39 /* wanfeng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wanfeng.jpg; sourceTree = "<group>"; };
 		78F766701E8A0A4B00EBFA39 /* DreamItPossible.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DreamItPossible.jpg; sourceTree = "<group>"; };
@@ -465,8 +465,8 @@
 				7871729B1E8507A7002C88F8 /* Singleton.h */,
 				787EDC0C1E88E2A30061CB6E /* ZAAudioRequestTask.h */,
 				787EDC0D1E88E2A30061CB6E /* ZAAudioRequestTask.m */,
-				787EDC0F1E8902AD0061CB6E /* ZAAudioLoader.h */,
-				787EDC101E8902AD0061CB6E /* ZAAudioLoader.m */,
+				787EDC0F1E8902AD0061CB6E /* ZAAudioDataLoader.h */,
+				787EDC101E8902AD0061CB6E /* ZAAudioDataLoader.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -760,7 +760,7 @@
 				787173031E8507A7002C88F8 /* MyMusicController.m in Sources */,
 				787172F61E8507A7002C88F8 /* MJIvar.m in Sources */,
 				787173011E8507A7002C88F8 /* AutoScrollLabel.m in Sources */,
-				787EDC111E8902AD0061CB6E /* ZAAudioLoader.m in Sources */,
+				787EDC111E8902AD0061CB6E /* ZAAudioDataLoader.m in Sources */,
 				787172F71E8507A7002C88F8 /* MJMember.m in Sources */,
 				787172EE1E8507A7002C88F8 /* UIBarButtonItem+Extension.m in Sources */,
 				787172F91E8507A7002C88F8 /* MJType.m in Sources */,

@@ -32,36 +32,27 @@ singleton_implementation(MusicTool)
         self.duration = 0;
         NSURL *musicUrl = [NSURL URLWithString:music.fileName];
         
-        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        NSString *fileName = [ZAAudioLoader stringEncodingWithMd5:music.fileName];
-        fileName = [fileName stringByAppendingString:@".mp3"];
-
-        NSString *cacheFilePath = [document stringByAppendingPathComponent:fileName];
-        
+        NSString *cacheFilePath = [self getAudioCachePathWithURLString:music.fileName];
         BOOL isCacheFileExist = [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath];
         if (isCacheFileExist) {
             //准备播放音乐
             self.audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"file:/\/\/%@",cacheFilePath]] options:nil];
             self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioAsset];
-            if (!self.avPlayer) {
-                self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
-            } else {
-                [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
-            }
-            [self.avPlayer play];
         } else {
-            self.audioLoader = [[ZAAudioLoader alloc] initWithCacheFilePath:cacheFilePath];
+            NSString *tempCacheFilePath = [self getAudioTempPathWithURLString:music.fileName];
+            self.audioLoader = [[ZAAudioLoader alloc] initWithCacheFilePath:tempCacheFilePath];
             NSURL *playUrl = [self.audioLoader getSchemeAudioURL:musicUrl];
             self.audioURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
             [self.audioURLAsset.resourceLoader setDelegate:self.audioLoader queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
             self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioURLAsset];
-            if (!self.avPlayer) {
-                self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
-            } else {
-                [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
-            }
-            self.avPlayer.volume = 0.5;
         }
+        if (!self.avPlayer) {
+            self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
+        } else {
+            [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
+        }
+
+        [self.avPlayer play];
         [self.avplayerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
@@ -189,6 +180,29 @@ singleton_implementation(MusicTool)
     
     _loadedProgress = loadedProgress;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TBPlayerLoadProgressChangedNotification" object:nil];
+}
+
+- (NSString *)getAudioCachePathWithURLString:(NSString *)urlString {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libDir = [paths objectAtIndex:0];
+    NSString *audioCache = [libDir stringByAppendingPathComponent:@"Payables/AudioCache"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:audioCache]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:audioCache withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+
+    NSString *fileName = [ZAAudioLoader stringEncodingWithMd5:urlString];
+    fileName = [fileName stringByAppendingString:@".mp3"];
+    
+    NSString *audioCachePath = [audioCache stringByAppendingPathComponent:fileName];
+    return audioCachePath;
+}
+
+- (NSString *)getAudioTempPathWithURLString:(NSString *)urlString {
+    NSString *tempPath = NSTemporaryDirectory();
+    
+    NSString *fileName = [ZAAudioLoader stringEncodingWithMd5:urlString];
+    fileName = [fileName stringByAppendingString:@".mp3"];
+    return [tempPath stringByAppendingPathComponent:fileName];
 }
 
 @end

@@ -11,7 +11,7 @@
 #import "CloudMusic.pch"
 #import <AVFoundation/AVFoundation.h>
 #import "Singleton.h"
-#import "ZAAudioLoader.h"
+#import "ZAAudioDataLoader.h"
 
 @interface MusicTool : NSObject<AVAudioPlayerDelegate>
 singleton_interface(MusicTool)
@@ -47,5 +47,9 @@ singleton_interface(MusicTool)
  *  暂停
  */
 -(void)pauseMusic;
+
+- (NSString *)getAudioCachePathWithURLString:(NSString *)urlString;
+
+- (NSString *)getAudioTempPathWithURLString:(NSString *)urlString;
 
 @end
