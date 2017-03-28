@@ -28,7 +28,11 @@ singleton_interface(MusicTool)
 @property (nonatomic, strong) AVPlayerItem *avplayerItem;
 @property (nonatomic, strong) ZAAudioLoader *audioLoader;
 
-@property (nonatomic, assign) CGFloat       loadedProgress;   //缓冲进度
+@property (nonatomic, assign) CGFloat loadedProgress;   //缓冲进度
+@property (nonatomic, assign) CGFloat currentSecond;    //当前播放时长
+@property (nonatomic, assign) CGFloat duration;         //播放总时长
+
+@property (nonatomic, assign) BOOL isAvPlayer;          //是否是avplayer
 
 /** 音乐播放前的准备工作*/
 -(void)prepareToPlayWithMusic:(MusicModel *)music;

@@ -6,7 +6,7 @@
 		<key>songName</key>
 		<string>青花瓷</string>
 		<key>fileName</key>
-		<string>http://101.227.98.45/m10.music.126.net/20170328113015/fb9ab441e72d56149420629466932a1b/ymusic/92bb/abd4/4f12/f952c3deabd02e179766e092a9f3927b.mp3</string>
+		<string>https://wdl.wallstreetcn.com/a9ba25e0-6cec-46bd-b09a-00718f69a3c0</string>
 		<key>singer</key>
 		<string>周杰伦</string>
 		<key>albumImage</key>
@@ -16,7 +16,7 @@
 		<key>songName</key>
 		<string>晚风</string>
 		<key>fileName</key>
-		<string>http://101.227.98.44/m10.music.126.net/20170328115012/e919c8e50417efd238d2afad70fdb4a2/ymusic/d0fd/a1dc/3976/9fc1dd31debd974c826d49dd0d56ca26.mp3?wshc_tag=0&amp;wsts_tag=58d9d79c&amp;wsid_tag=b4a8a5f6&amp;wsiphost=ipdbm</string>
+		<string>https://wdl.wallstreetcn.com/5eb4d3ec-eeda-43df-bbd6-d36334b97565</string>
 		<key>singer</key>
 		<string>五百</string>
 		<key>albumImage</key>
@@ -26,11 +26,41 @@
 		<key>songName</key>
 		<string>Dream It Possible</string>
 		<key>fileName</key>
-		<string>http://116.224.86.35/m10.music.126.net/20170328112818/42fa5ff0f87060b34b1d41e40496aea5/ymusic/2f5b/dc3e/909c/ad6c9217129f8707013d1fdabbbe742c.mp3</string>
+		<string>http://ok0lm7lph.bkt.clouddn.com/3%E6%9C%8811%E6%97%A5%E4%BB%98%E9%B9%8F%E8%AF%B4%EF%BC%9A%E4%BB%8E%E5%BE%B7%E6%8B%89%E5%90%89%E8%AE%B2%E8%AF%9D%E8%81%8A%E8%81%8A%E6%B1%87%E7%8E%87%E7%9A%84%E7%9B%B8%E5%AF%B9%E9%97%AE%E9%A2%98.MP3</string>
 		<key>singer</key>
 		<string>张靓颖</string>
 		<key>albumImage</key>
 		<string>DreamItPossible.jpg</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>See You Again</string>
+		<key>fileName</key>
+		<string>See You Again.mp3</string>
+		<key>singer</key>
+		<string>Wiz Khalifa,Charlie Puth</string>
+		<key>albumImage</key>
+		<string>see u again.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>Viva la Vida</string>
+		<key>fileName</key>
+		<string>Coldplay - Viva la Vida.mp3</string>
+		<key>singer</key>
+		<string>Coldplay</string>
+		<key>albumImage</key>
+		<string>viva_400.png</string>
+	</dict>
+	<dict>
+		<key>songName</key>
+		<string>泡沫</string>
+		<key>fileName</key>
+		<string>泡沫.mp3</string>
+		<key>singer</key>
+		<string>邓紫琪G.E.M</string>
+		<key>albumImage</key>
+		<string>gem_400.png</string>
 	</dict>
 </array>
 </plist>

@@ -42,7 +42,7 @@
     self.playControlView.albumImageName = music.albumImage;
     self.playMainControlView.playing = YES;
     
-    double duration = [MusicTool sharedMusicTool].player.duration;
+    double duration = [MusicTool sharedMusicTool].duration;
     self.playMainControlView.totalTimeString = [NSString getMinuteSecondFrom:duration];
     self.backgroundView.alpha = 0;
     

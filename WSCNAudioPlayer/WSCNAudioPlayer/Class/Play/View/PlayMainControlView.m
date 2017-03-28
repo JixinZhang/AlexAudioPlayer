@@ -54,7 +54,7 @@
 {
     self.totalTime.text = totalTimeString;
     _totalTimeString = totalTimeString;
-    self.slider.maximumValue = [MusicTool sharedMusicTool].player.duration;
+    self.slider.maximumValue = [MusicTool sharedMusicTool].duration;
 }
 
 -(void)setup
@@ -240,9 +240,9 @@
 
 -(void)sliderChange:(PlaySlider *)slider
 {
-    [MusicTool sharedMusicTool].player.currentTime = slider.value;
-    self.currentTime.text = [NSString getMinuteSecondFrom:slider.value];
-    self.slider.dotView.x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
+//    [MusicTool sharedMusicTool].player.currentTime = slider.value;
+//    self.currentTime.text = [NSString getMinuteSecondFrom:slider.value];
+//    self.slider.dotView.x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
 }
 
 -(void)replay
@@ -266,11 +266,23 @@
     if (self.isPlaying && self.isDragging == NO)
     {
         // 获取当前时间
-//        double currentTime = [MusicTool sharedMusicTool].player.currentTime;
-//        self.slider.value = currentTime;
-//        self.slider.dotView.x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
-//        //更新时间
-//        self.currentTime.text = [NSString getMinuteSecondFrom:currentTime];
+        double currentTime;
+        if ([MusicTool sharedMusicTool].isAvPlayer) {
+            currentTime = [MusicTool sharedMusicTool].currentSecond;
+        } else {
+            currentTime = [MusicTool sharedMusicTool].player.currentTime;
+        }
+        self.slider.value = currentTime;
+        if (self.slider.maximumValue == 0) {
+            return;
+        }
+        CGFloat x = self.slider.value / self.slider.maximumValue * (self.slider.width - self.slider.dotView.width / 2) - 3.8;
+        if (x < 0) {
+            x = 0;
+        }
+        self.slider.dotView.x = x;
+        //更新时间
+        self.currentTime.text = [NSString getMinuteSecondFrom:currentTime];
     }
 }
 

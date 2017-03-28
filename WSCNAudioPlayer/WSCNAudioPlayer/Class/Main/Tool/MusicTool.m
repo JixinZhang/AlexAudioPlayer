@@ -27,13 +27,17 @@ singleton_implementation(MusicTool)
     [self.avPlayer pause];
     [self.player pause];
     if ([music.fileName hasPrefix:@"http"]) {
+        self.isAvPlayer = YES;
+        self.currentSecond = 0;
+        self.duration = 0;
         NSURL *musicUrl = [NSURL URLWithString:music.fileName];
         
         NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
         NSString *fileName = [ZAAudioLoader stringEncodingWithMd5:music.fileName];
-        
-        NSString *cacheFilePath = [[document stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:[musicUrl pathExtension]];
+        fileName = [fileName stringByAppendingString:@".mp3"];
 
+        NSString *cacheFilePath = [document stringByAppendingPathComponent:fileName];
+        
         BOOL isCacheFileExist = [[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath];
         if (isCacheFileExist) {
             //准备播放音乐
@@ -44,30 +48,32 @@ singleton_implementation(MusicTool)
             } else {
                 [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
             }
-            return;
-        }
-        self.audioLoader = [[ZAAudioLoader alloc] initWithCacheFilePath:cacheFilePath];
-        NSURL *playUrl = [self.audioLoader getSchemeAudioURL:musicUrl];
-        self.audioURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
-        [self.audioURLAsset.resourceLoader setDelegate:self.audioLoader queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-        self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioURLAsset];
-        if (!self.avPlayer) {
-            self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
+            [self.avPlayer play];
         } else {
-            [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
+            self.audioLoader = [[ZAAudioLoader alloc] initWithCacheFilePath:cacheFilePath];
+            NSURL *playUrl = [self.audioLoader getSchemeAudioURL:musicUrl];
+            self.audioURLAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
+            [self.audioURLAsset.resourceLoader setDelegate:self.audioLoader queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+            self.avplayerItem = [AVPlayerItem playerItemWithAsset:self.audioURLAsset];
+            if (!self.avPlayer) {
+                self.avPlayer = [AVPlayer playerWithPlayerItem:self.avplayerItem];
+            } else {
+                [self.avPlayer replaceCurrentItemWithPlayerItem:self.avplayerItem];
+            }
+            self.avPlayer.volume = 0.5;
         }
-        self.avPlayer.volume = 0.5;
         [self.avplayerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
         [self.avplayerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
 //        [self.avplayerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
 
     } else {
+        self.isAvPlayer = NO;
         NSURL *musicUrl = [[NSBundle mainBundle] URLForResource:music.fileName withExtension:nil];
         
         self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:musicUrl error:nil];
         self.player.delegate = self;
-        
+        self.duration = self.player.duration;
         //准备播放音乐
         [self.player prepareToPlay];
     }
@@ -75,16 +81,22 @@ singleton_implementation(MusicTool)
 
 -(void)playMusic
 {
-    [self.player play];
-    [self.avPlayer play];
+    if (self.isAvPlayer) {
+        [self.avPlayer play];
+    } else {
+        [self.player play];
+    }
     self.playing = YES;
 }
 
 
 -(void)pauseMusic
 {
-    [self.player pause];
-    [self.avPlayer pause];
+    if (self.isAvPlayer) {
+        [self.avPlayer pause];
+    } else {
+        [self.player pause];
+    }
     self.playing = NO;
 }
 
@@ -130,6 +142,8 @@ singleton_implementation(MusicTool)
         CGFloat currentSecond = playerItem.currentTime.value/playerItem.currentTime.timescale;// 计算当前在第几秒
         CGFloat totalSecond = playerItem.duration.value/playerItem.duration.timescale;
         NSLog(@"currentSecond = %.4f \n totalSecond = %.4f",currentSecond ,totalSecond);
+        self.currentSecond = currentSecond;
+        self.duration = totalSecond;
     }];
 }
 
@@ -156,8 +170,7 @@ singleton_implementation(MusicTool)
     });
 }
 
-- (void)calculateDownloadProgress:(AVPlayerItem *)playerItem
-{
+- (void)calculateDownloadProgress:(AVPlayerItem *)playerItem {
     NSArray *loadedTimeRanges = [playerItem loadedTimeRanges];
     CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
     float startSeconds = CMTimeGetSeconds(timeRange.start);
@@ -166,11 +179,10 @@ singleton_implementation(MusicTool)
     CMTime duration = playerItem.duration;
     CGFloat totalDuration = CMTimeGetSeconds(duration);
     self.loadedProgress = timeInterval / totalDuration;
-    NSLog(@"loadProgress = %.3f",self.loadedProgress);
+    NSLog(@"\n *********** \n loadProgress = %.3f",self.loadedProgress);
 }
 
-- (void)setLoadedProgress:(CGFloat)loadedProgress
-{
+- (void)setLoadedProgress:(CGFloat)loadedProgress {
     if (_loadedProgress == loadedProgress) {
         return;
     }
